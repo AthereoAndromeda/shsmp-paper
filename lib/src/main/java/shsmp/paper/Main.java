@@ -38,13 +38,6 @@ public class Main extends JavaPlugin {
         // Add Recipes
         Bukkit.addRecipe(new LightGapple().getRecipe());
         Bukkit.addRecipe(new Necronomicon().getRecipe());
-
-        new Timer().scheduleAtFixedRate(new TimerTask() {
-            @Override
-            public void run() {
-                listener.updateScoreboard();
-            }
-        }, 0, 10000);
     }
 
     @Override
@@ -114,7 +107,7 @@ public class Main extends JavaPlugin {
             String itemInHandName = itemInMainHand.hasItemMeta() ? itemInMainHand.getItemMeta().getDisplayName() : null;
 
             // Checks if player is already holding Necronomicon
-            Boolean itemHandCondition = itemInHandName == null
+            boolean itemHandCondition = itemInHandName == null
                     || !itemInHandName.equals(necronomicon.getItemMeta().getDisplayName());
 
             if (itemHandCondition) {
@@ -139,7 +132,7 @@ public class Main extends JavaPlugin {
 
             assert player != null;
             sender.sendMessage("WWW" + player.getName());
-            return  true;
+            return true;
         }
 
         return false;
