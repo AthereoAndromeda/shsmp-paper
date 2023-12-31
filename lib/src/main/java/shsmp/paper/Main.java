@@ -1,8 +1,6 @@
 package shsmp.paper;
 
 import java.io.IOException;
-import java.util.Timer;
-import java.util.TimerTask;
 
 import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
@@ -17,17 +15,19 @@ import org.bukkit.plugin.PluginManager;
 import org.bukkit.plugin.java.JavaPlugin;
 
 import org.jetbrains.annotations.NotNull;
+
 import shsmp.paper.DiscordWebhook.EmbedObject;
+import shsmp.paper.recipes.LightGapple;
+import shsmp.paper.recipes.Necronomicon;
+import shsmp.paper.recipes.UsedNecronomicon;
 
 public class Main extends JavaPlugin {
     public FileConfiguration config;
-    public MyRecipes recipes;
     public MyListener listener;
 
     @Override
     public void onEnable() {
         this.config = getConfig();
-        this.recipes = new MyRecipes(this);
         this.listener = new MyListener(this);
         configFileHandler();
 
@@ -36,8 +36,8 @@ public class Main extends JavaPlugin {
         bukkitPluginManager.registerEvents(listener, this);
 
         // Add Recipes
-        Bukkit.addRecipe(recipes.new LightGapple().getRecipe());
-        Bukkit.addRecipe(recipes.new Necronomicon().getRecipe());
+        Bukkit.addRecipe(new LightGapple().getRecipe());
+        Bukkit.addRecipe(new Necronomicon().getRecipe());
 
         new Timer().scheduleAtFixedRate(new TimerTask() {
             @Override
@@ -69,7 +69,7 @@ public class Main extends JavaPlugin {
 
                 // Replace Necronomicon with Used Necronomicon
                 revivingPlayer.getInventory()
-                        .setItemInMainHand(recipes.new UsedNecronomicon(revivedPlayer, revivingPlayer).getItem());
+                        .setItemInMainHand(new UsedNecronomicon(revivedPlayer, revivingPlayer).getItem());
 
                 // Broadcast Message that someone has been revived
                 String revivedMessage = ChatColor.translateAlternateColorCodes('&',
@@ -106,7 +106,7 @@ public class Main extends JavaPlugin {
 
             Player player = (Player) sender;
             String necroOnly = "You can only use this command through the Necronomicon!";
-            ItemStack necronomicon = recipes.new Necronomicon().getItem();
+            ItemStack necronomicon = new Necronomicon().getItem();
             ItemStack itemInMainHand = player.getInventory().getItemInMainHand();
 
             // Checks if Item in hand has ItemMeta. If true, returns display name, else it

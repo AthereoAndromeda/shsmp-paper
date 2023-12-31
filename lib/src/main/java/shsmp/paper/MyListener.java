@@ -16,14 +16,13 @@ import org.bukkit.scoreboard.Scoreboard;
 import org.bukkit.scoreboard.Team;
 
 import shsmp.paper.DiscordWebhook.EmbedObject;
+import shsmp.paper.recipes.Necronomicon;
 
 public class MyListener implements Listener {
     private Main plugin;
-    private MyRecipes recipes;
 
     public MyListener(Main plugin) {
         this.plugin = plugin;
-        this.recipes = new MyRecipes(plugin);
     }
 
     @EventHandler
@@ -45,7 +44,7 @@ public class MyListener implements Listener {
         }
 
         String eventRecipeName = event.getRecipe().getResult().getItemMeta().getAsString();
-        String NecroName = recipes.new Necronomicon().getItem().getItemMeta().getAsString();
+        String NecroName = new Necronomicon().getItem().getItemMeta().getAsString();
 
         // Going to make it check for lore instead soon, because it is possible
         // someone just changes the name using Anvil and get
