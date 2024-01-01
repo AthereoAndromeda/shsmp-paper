@@ -15,6 +15,7 @@ import shsmp.paper.commands.Fly;
 import shsmp.paper.commands.Refresh;
 import shsmp.paper.commands.Revive;
 import shsmp.paper.recipes.LightGapple;
+import shsmp.paper.recipes.LightNecronomicon;
 import shsmp.paper.recipes.Necronomicon;
 
 public class Main extends JavaPlugin {
@@ -32,8 +33,15 @@ public class Main extends JavaPlugin {
         bukkitPluginManager.registerEvents(listener, this);
 
         // Add Recipes
-        Bukkit.addRecipe(new LightGapple().getRecipe());
-        Bukkit.addRecipe(new Necronomicon().getRecipe());
+        if (config.getBoolean("EnableLightGapple")) {
+            Bukkit.addRecipe(new LightGapple().getRecipe());
+        }
+
+        if (config.getBoolean("LightNecronomicon")) {
+            Bukkit.addRecipe(new LightNecronomicon().getRecipe());
+        } else {
+            Bukkit.addRecipe(new Necronomicon().getRecipe());
+        }
     }
 
     @Override
@@ -67,6 +75,7 @@ public class Main extends JavaPlugin {
         config.addDefault("EnableDiscordWebhook", false);
         config.addDefault("DiscordWebhookLink", "Insert Webhook here");
         config.addDefault("LightNecronomicon", false);
+        config.addDefault("EnableLightGapple", true);
 
         config.options().copyDefaults(true);
         saveConfig();
