@@ -16,6 +16,8 @@ import org.bukkit.event.server.ServerLoadEvent;
 import shsmp.paper.DiscordWebhook.EmbedObject;
 import shsmp.paper.recipes.Necronomicon;
 
+import java.util.logging.Level;
+
 public class MyListener implements Listener {
     private Main plugin;
 
@@ -75,7 +77,7 @@ public class MyListener implements Listener {
 
     @EventHandler
     public void onPlayerRespawn(PlayerRespawnEvent event) {
-        System.out.println("Respawned");
+        plugin.getLogger().log(Level.INFO, "Respawned: ", event.getPlayer().getName());
     }
 
     @EventHandler
