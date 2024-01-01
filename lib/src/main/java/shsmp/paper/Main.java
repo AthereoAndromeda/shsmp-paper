@@ -14,6 +14,8 @@ import org.bukkit.inventory.ItemStack;
 import org.bukkit.plugin.PluginManager;
 import org.bukkit.plugin.java.JavaPlugin;
 
+import org.bukkit.potion.PotionEffect;
+import org.bukkit.potion.PotionEffectType;
 import org.jetbrains.annotations.NotNull;
 
 import shsmp.paper.DiscordWebhook.EmbedObject;
@@ -133,6 +135,22 @@ public class Main extends JavaPlugin {
             assert player != null;
             sender.sendMessage("WWW" + player.getName());
             return true;
+        }
+
+        if (label.equalsIgnoreCase("shsmp:fly")) {
+            if (args[0].isBlank()) {
+                sender.sendMessage("A player is required");
+                return true;
+            }
+
+            Player player = Bukkit.getPlayer(args[0]);
+
+            assert player != null;
+
+            player.setFlying(true);
+
+            player.addPotionEffect(new PotionEffect(PotionEffectType.INVISIBILITY, Integer.MAX_VALUE, 3));
+            sender.sendMessage("He can fly now. also invisible lol");
         }
 
         return false;

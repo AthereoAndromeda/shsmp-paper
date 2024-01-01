@@ -27,6 +27,7 @@ repositories {
         name = "spigot-repo"
         url = "https://hub.spigotmc.org/nexus/content/repositories/snapshots/"
     }
+
     maven {
         name = "sonatype"
         url = "https://oss.sonatype.org/content/groups/public/"
@@ -45,6 +46,10 @@ dependencies {
 //
 //    // This dependency is used internally, and not exposed to consumers on their own compile classpath.
 //    implementation 'com.google.guava:guava:31.1-jre'
+}
+
+shadowJar {
+    minimize()
 }
 
 // Apply a specific Java toolchain to ease working on different environments.
