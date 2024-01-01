@@ -77,7 +77,7 @@ public class MyListener implements Listener {
 
     @EventHandler
     public void onPlayerRespawn(PlayerRespawnEvent event) {
-        plugin.getLogger().log(Level.INFO, "Respawned: ", event.getPlayer().getName());
+        plugin.getLogger().log(Level.INFO, "Respawned: " + event.getPlayer().getName());
     }
 
     @EventHandler

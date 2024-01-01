@@ -3,27 +3,34 @@ package shsmp.paper;
 import org.bukkit.plugin.java.JavaPlugin;
 
 import java.io.File;
+import java.io.IOException;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 /*
 * Long term storage via file
 *
 */
 public class TeamsFile {
-    private Main plugin;
-    private String path;
-    private String folderpath;
-    private File file;
+    private final Main plugin;
+    private final Logger logger;
+    private final File file;
 
-    public TeamsFile(Main plugin, String path, String folder) {
+    public TeamsFile(String fileName) {
         this.plugin = JavaPlugin.getPlugin(Main.class);
-        this.path = path;
-        this.folderpath = folder;
-        this.file = null;
+        this.logger = plugin.getLogger();
+        this.file = new File(plugin.getDataFolder(), fileName);
     }
 
-    public void init() {
-        this.file = new File(plugin.getDataFolder(), this.path);
+    public void init() throws IOException {
+        logger.log(Level.INFO, "tryna init");
 
-//        file
+        if (file.createNewFile()) {
+            plugin.getLogger().log(Level.INFO, "created");
+        } else {
+            plugin.getLogger().log(Level.INFO, "already created");
+        }
+
+        plugin.getLogger().log(Level.INFO, "File Init Complete");
     }
 }

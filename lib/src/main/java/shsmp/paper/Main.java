@@ -18,6 +18,8 @@ import shsmp.paper.recipes.LightGapple;
 import shsmp.paper.recipes.LightNecronomicon;
 import shsmp.paper.recipes.Necronomicon;
 
+import java.io.IOException;
+
 public class Main extends JavaPlugin {
     public FileConfiguration config;
     public MyListener listener;
@@ -27,6 +29,15 @@ public class Main extends JavaPlugin {
         this.config = getConfig();
         this.listener = new MyListener(this);
         configFileHandler();
+
+        //Teams
+        TeamsFile ded = new TeamsFile("ded.txt");
+
+        try {
+            ded.init();
+        } catch (IOException e) {
+            throw new RuntimeException(e);
+        }
 
         // Adds the event handlers
         PluginManager bukkitPluginManager = Bukkit.getPluginManager();
