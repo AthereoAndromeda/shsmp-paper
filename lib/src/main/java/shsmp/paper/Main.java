@@ -24,6 +24,8 @@ public class Main extends JavaPlugin {
     public FileConfiguration config;
     public MyListener listener;
 
+    public TeamsFile teamsFile;
+
     @Override
     public void onEnable() {
         this.config = getConfig();
@@ -38,6 +40,8 @@ public class Main extends JavaPlugin {
         } catch (IOException e) {
             throw new RuntimeException(e);
         }
+
+        this.teamsFile = ded;
 
         // Adds the event handlers
         PluginManager bukkitPluginManager = Bukkit.getPluginManager();
