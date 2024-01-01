@@ -23,14 +23,12 @@ public class TeamsFile {
     }
 
     public void init() throws IOException {
-        logger.log(Level.INFO, "tryna init");
-
         if (file.createNewFile()) {
-            plugin.getLogger().log(Level.INFO, "created");
+            logger.log(Level.INFO, "Team File created");
         } else {
-            plugin.getLogger().log(Level.INFO, "already created");
+            logger.log(Level.INFO, "Team File already created");
         }
 
-        plugin.getLogger().log(Level.INFO, "File Init Complete");
+        logger.log(Level.INFO, "Team File Init Complete");
     }
 }
