@@ -1,6 +1,5 @@
 package shsmp.paper;
 
-import net.kyori.adventure.text.Component;
 import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
 import org.bukkit.GameMode;
@@ -53,8 +52,8 @@ public class MyListener implements Listener {
             String rawMessage = "&3" + player.getName() + " &rhas crafted a &l&8Necronomicon.&r";
             String msg = ChatColor.translateAlternateColorCodes('&', rawMessage);
 
-            Component c = Component.text(msg);
-            Bukkit.broadcast(c);
+
+            Bukkit.broadcastMessage(msg);
             sendWebhook(event);
         }
     }
