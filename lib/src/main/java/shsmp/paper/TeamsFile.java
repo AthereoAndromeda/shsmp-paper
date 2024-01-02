@@ -4,10 +4,7 @@ import org.bukkit.Bukkit;
 import org.bukkit.entity.Player;
 import org.bukkit.plugin.java.JavaPlugin;
 
-import java.io.File;
-import java.io.FileNotFoundException;
-import java.io.FileWriter;
-import java.io.IOException;
+import java.io.*;
 import java.util.ArrayList;
 import java.util.Scanner;
 import java.util.logging.Level;
@@ -78,12 +75,13 @@ public class TeamsFile {
         playerList.removeIf(playerName -> playerName.equals(player.getName()));
 
         FileWriter writer = new FileWriter(file);
-
+        BufferedWriter buf = new BufferedWriter(writer);
         for (String playerName: playerList) {
-            writer.write(playerName);
+            buf.write(playerName);
+            buf.newLine();
         }
 
-        writer.close();
+        buf.close();
     }
 
     public ArrayList<Player> getPlayers() throws FileNotFoundException {
