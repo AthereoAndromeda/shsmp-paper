@@ -50,6 +50,7 @@ dependencies {
 
 shadowJar {
     minimize()
+    archiveBaseName.set("shsmp-paper")
 }
 
 // Apply a specific Java toolchain to ease working on different environments.
