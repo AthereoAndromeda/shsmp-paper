@@ -6,16 +6,17 @@ import net.md_5.bungee.api.chat.ClickEvent;
 import net.md_5.bungee.api.chat.ComponentBuilder;
 import net.md_5.bungee.api.chat.HoverEvent;
 import net.md_5.bungee.api.chat.hover.content.Text;
-import org.bukkit.Bukkit;
 import org.bukkit.Material;
 import org.bukkit.NamespacedKey;
 import org.bukkit.entity.Player;
 import org.bukkit.inventory.ItemStack;
-import org.bukkit.inventory.Recipe;
 import org.bukkit.inventory.ShapedRecipe;
 import org.bukkit.inventory.meta.BookMeta;
 import org.bukkit.plugin.java.JavaPlugin;
 import shsmp.paper.Main;
+
+import java.io.FileNotFoundException;
+import java.util.ArrayList;
 
 /**
  * Necronomicon to Resurrect and Revive players
@@ -35,23 +36,26 @@ public class Necronomicon {
 
         bookMeta.spigot().addPage(firstPage);
 
-        // List all players
-        for (Player onlplayer : Bukkit.getOnlinePlayers()) {
-            // TODO store time person died
+        ArrayList<Player> deadPlayers = null;
+
+        try {
+            deadPlayers = plugin.teamsFile.getPlayers();
+        } catch (FileNotFoundException e) {
+            throw new RuntimeException(e);
+        }
+
+        for (Player player : deadPlayers) {
+            String playerName = player.getName();
             String content = "Time died to be set soon";
-            String coloredContent = ChatColor.translateAlternateColorCodes('&', onlplayer.getDisplayName() + "\n\n" + content);
+            String coloredContent = ChatColor.translateAlternateColorCodes('&', playerName + "\n\n" + content);
 
-            // Only adds dead players
-            if (onlplayer.isDead()) {
-                BaseComponent[] page = new ComponentBuilder(coloredContent)
-                        .event(new ClickEvent(ClickEvent.Action.RUN_COMMAND, "/shsmp:revive " + onlplayer.getUniqueId()))
-                        .event(new HoverEvent(HoverEvent.Action.SHOW_TEXT, new Text("Revive this player?")))
-                        .create();
+            BaseComponent[] page = new ComponentBuilder(coloredContent)
+                    .event(new ClickEvent(ClickEvent.Action.RUN_COMMAND, "/shsmp:revive " + playerName))
+                    .event(new HoverEvent(HoverEvent.Action.SHOW_TEXT, new Text("Revive this player?")))
+                    .create();
 
-                // add the page to the meta
-                bookMeta.spigot().addPage(page);
-            }
-
+            // add the page to the meta
+            bookMeta.spigot().addPage(page);
         }
 
         BaseComponent[] refreshPage = new ComponentBuilder("Refresh")

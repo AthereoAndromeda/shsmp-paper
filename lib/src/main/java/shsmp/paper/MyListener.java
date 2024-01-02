@@ -3,6 +3,7 @@ package shsmp.paper;
 import net.kyori.adventure.text.Component;
 import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
+import org.bukkit.GameMode;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
@@ -16,6 +17,7 @@ import org.bukkit.event.server.ServerLoadEvent;
 import shsmp.paper.DiscordWebhook.EmbedObject;
 import shsmp.paper.recipes.Necronomicon;
 
+import java.io.IOException;
 import java.util.logging.Level;
 
 public class MyListener implements Listener {
@@ -66,11 +68,13 @@ public class MyListener implements Listener {
         event.setDeathMessage(ChatColor.RED + "You are now dead, sad.");
 
         Player player = event.getEntity();
+        player.setGameMode(GameMode.SPECTATOR);
 
-        // Player killer = player.getKiller();
-
-//        player.sendMessage("You have been assigned to Dead team");
-
+        try {
+            plugin.teamsFile.addPlayer(player);
+        } catch (IOException e) {
+            throw new RuntimeException(e);
+        }
 
         Bukkit.broadcastMessage("Big oof. " + player.getDisplayName() + " has died");
     }

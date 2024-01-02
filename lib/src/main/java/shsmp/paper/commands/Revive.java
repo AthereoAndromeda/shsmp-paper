@@ -44,6 +44,12 @@ public class Revive {
                     "&b" + revivedPlayer.getDisplayName() + " was revived by " + revivingPlayer.getDisplayName());
             Bukkit.broadcastMessage(revivedMessage);
 
+            try {
+                plugin.teamsFile.removePlayer(revivedPlayer);
+            } catch (IOException e) {
+                throw new RuntimeException(e);
+            }
+
             if (plugin.getConfig().getBoolean("EnableDiscordWebhook")) {
                 DiscordWebhook webhook = new DiscordWebhook(plugin.getConfig().getString("DiscordWebhook"));
                 DiscordWebhook.EmbedObject embed = new DiscordWebhook.EmbedObject()
