@@ -18,10 +18,10 @@ repositories {
     // Use Maven Central for resolving dependencies.
     mavenCentral()
 
-    maven {
-        name = "papermc-repo"
-        url = "https://repo.papermc.io/repository/maven-public/"
-    }
+//    maven {
+//        name = "papermc-repo"
+//        url = "https://repo.papermc.io/repository/maven-public/"
+//    }
 
     maven {
         name = "spigot-repo"
@@ -38,7 +38,7 @@ dependencies {
     // Use JUnit Jupiter for testing.
     testImplementation 'org.junit.jupiter:junit-jupiter:5.9.1'
 
-    implementation 'io.papermc.paper:paper-api:1.20.4-R0.1-SNAPSHOT'
+//    implementation 'io.papermc.paper:paper-api:1.20.4-R0.1-SNAPSHOT'
 
     implementation 'org.spigotmc:spigot-api:1.20.4-R0.1-SNAPSHOT'
     //    // This dependency is exported to consumers, that is to say found on their compile classpath.

@@ -24,16 +24,12 @@ public class UsedNecronomicon {
         DateTimeFormatter dateFormatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss z");
         ZonedDateTime now = ZonedDateTime.now(ZoneOffset.UTC);
 
-        BaseComponent[] firstPage = new ComponentBuilder("The Necronomicon")
-                .create();
-
         String mainPageContent = revivedPlayer.getDisplayName() + " has been revived by " + revivingPlayer.getDisplayName() +
                 "\n\nRevived on " + dateFormatter.format(now);
 
         BaseComponent[] mainPage = new ComponentBuilder(mainPageContent)
                 .create();
 
-        bookMeta.spigot().addPage(firstPage);
         bookMeta.spigot().addPage(mainPage);
 
         //set the title and author of this book
