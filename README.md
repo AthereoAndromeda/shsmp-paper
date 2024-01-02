@@ -1,4 +1,4 @@
-# shsmp-paper
+# shsmp-spigot
 Another Spigot plugin for SHSMP gameplay. This time updated and move to Gradle.
 
 ## Prerequisites
