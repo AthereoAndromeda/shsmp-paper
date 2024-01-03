@@ -51,13 +51,15 @@ public class TeamsFile {
 
         // Write player name to file
         FileWriter writer = new FileWriter(file, true);
+        BufferedWriter buf = new BufferedWriter(writer);
         if (playerList.contains(playerName)) {
             logger.log(Level.INFO, "ALREADY CONTAINED");
         } else {
-            writer.append(playerName);
+            buf.append(playerName);
+            buf.newLine();
             logger.log(Level.INFO, "ADDED TO FILE");
         }
-        writer.close();
+        buf.close();
     }
 
     public void removePlayer(Player player) throws IOException {
