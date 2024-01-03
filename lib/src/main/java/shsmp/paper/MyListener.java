@@ -13,6 +13,7 @@ import org.bukkit.event.player.PlayerQuitEvent;
 import org.bukkit.event.player.PlayerRespawnEvent;
 import org.bukkit.event.server.ServerLoadEvent;
 
+import org.bukkit.inventory.ItemStack;
 import shsmp.paper.DiscordWebhook.EmbedObject;
 import shsmp.paper.recipes.Necronomicon;
 
@@ -42,13 +43,31 @@ public class MyListener implements Listener {
             return;
         }
 
+        plugin.getLogger().log(Level.INFO, "crafted");
+
         String eventRecipeName = event.getRecipe().getResult().getItemMeta().getAsString();
         String NecroName = new Necronomicon().getItem().getItemMeta().getAsString();
+
+        // Record the initial amount of the item in the player's inventory before crafting
+        ItemStack craftedItem = event.getCurrentItem().clone();
+        int initialAmount = craftedItem.getAmount();
+
+        Player player = (Player) event.getWhoClicked();
+
+        // Let the event finish and update the player's inventory
+        Bukkit.getScheduler().runTaskLater(plugin, () -> {
+            // Calculate the number of items crafted
+            ItemStack finalCraftedItem = player.getInventory().getItemInMainHand();
+            int finalAmount = finalCraftedItem.getAmount();
+
+            int itemsCrafted = finalAmount - initialAmount;
+            player.sendMessage("Crafted: " + itemsCrafted + " " + finalCraftedItem.getType().toString());
+        }, 1L);
 
         // Going to make it check for lore instead soon, because it is possible
         // someone just changes the name using Anvil and get
         if (NecroName.equals(eventRecipeName)) {
-            Player player = (Player) event.getWhoClicked();
+//            Player player = (Player) event.getWhoClicked();
             String rawMessage = "&3" + player.getName() + " &rhas crafted a &l&8Necronomicon.&r";
             String msg = ChatColor.translateAlternateColorCodes('&', rawMessage);
 

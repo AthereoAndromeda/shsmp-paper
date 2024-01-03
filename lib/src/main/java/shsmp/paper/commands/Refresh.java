@@ -4,7 +4,9 @@ import org.bukkit.command.Command;
 import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
 import org.bukkit.inventory.ItemStack;
+import org.bukkit.inventory.meta.BookMeta;
 import org.jetbrains.annotations.NotNull;
+import shsmp.paper.recipes.BaseNecronomicon;
 import shsmp.paper.recipes.Necronomicon;
 
 public class Refresh {
@@ -34,9 +36,9 @@ public class Refresh {
             return true;
         }
 
-        // Refreshes the Necronomicon by giving the player a new updated one.
-        // pretty stupid but i dunno how to dynamically update an existing book.
-        player.getInventory().setItemInMainHand(necronomicon);
+        // Set the updated BookMeta back to the book item
+        BookMeta bookMeta = new BaseNecronomicon().getBookMeta();
+        itemInMainHand.setItemMeta(bookMeta);
         return true;
     }
 }
