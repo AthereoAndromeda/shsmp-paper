@@ -20,7 +20,7 @@ public class BaseNecronomicon {
 
     public ItemStack getItem() {
         ItemStack writtenBook = new ItemStack(Material.WRITTEN_BOOK);
-        BookMeta bookMeta =  getBookMeta();
+        BookMeta bookMeta = getBookMeta();
         writtenBook.setItemMeta(bookMeta);
         return writtenBook;
     }
